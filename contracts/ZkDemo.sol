@@ -3,7 +3,6 @@ pragma solidity ^0.8.24;
 
 import "hardhat/console.sol";
 
-// prove that I know rational a and b that a+b = c
 contract ZkDemo {
     // bn128
     uint256 constant Gx = 1;
@@ -43,6 +42,7 @@ contract ZkDemo {
         return mulmod(num, modExp(den, curve_order - 2, curve_order), curve_order);
     }
 
+    // prove that I know rational a and b that a+b = c
     function rationalAdd(ECPoint calldata A, ECPoint calldata B, uint256 num, uint256 den) public view returns (bool verified) {
         (uint256 abX, uint256 abY) = ecAdd(A.x, A.y, B.x, B.y);
         (uint256 cX, uint256 cY) = rationalToECPoint(num, den);
