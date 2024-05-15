@@ -65,7 +65,8 @@ describe("ZkDemo", function () {
       let x2 = 15;
       let x3 = 5;
 
-      await zkDemo.ecComputation([A1[0], A1[1]], B2, [C1[0], C1[1]], x1, x2, x3);
+      let verified = await zkDemo.ecComputation([A1[0], A1[1]], B2, [C1[0], C1[1]], x1, x2, x3);
+      expect(verified).to.be.true;
     });
   });
 });

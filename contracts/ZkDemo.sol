@@ -88,10 +88,10 @@ contract ZkDemo {
             uint256 j = i * 6;
             input[j + 0] = p1[i].X;
             input[j + 1] = p1[i].Y;
-            input[j + 2] = p2[i].X[0];
-            input[j + 3] = p2[i].X[1];
-            input[j + 4] = p2[i].Y[0];
-            input[j + 5] = p2[i].Y[1];
+            input[j + 2] = p2[i].X[1];
+            input[j + 3] = p2[i].X[0];
+            input[j + 4] = p2[i].Y[1];
+            input[j + 5] = p2[i].Y[0];
         }
 
         uint256[1] memory out;
@@ -233,7 +233,7 @@ contract ZkDemo {
         );
 
     // Verify
-    // 0 = -A1B2 +a1b2 + X1c2 + C1d2
+    // 0 = -A1B2 + a1b2 + X1c2 + C1d2
     // X1 = x1G1 + x2G1 + x3G1
     function ecComputation(
         G1Point calldata A1,
@@ -245,22 +245,22 @@ contract ZkDemo {
     ) external view returns (bool verified) {
         G1Point memory X1 = initG1(x1 + x2 + x3);
 
-        console.log("A1");
-        console.log(A1.X, A1.Y);
-        console.log("B2");
-        console.log(B2.X[0], B2.X[1], B2.Y[0], B2.Y[1]);
-        console.log("a1");
-        console.log(a1.X, a1.Y);
-        console.log("b2");
-        console.log(b2.X[0], b2.X[1], b2.Y[0], b2.Y[1]);
-        console.log("X1");
-        console.log(X1.X, X1.Y);
-        console.log("c2");
-        console.log(c2.X[0], c2.X[1], c2.Y[0], c2.Y[1]);
-        console.log("C1");
-        console.log(C1.X, C1.Y);
-        console.log("d2");
-        console.log(d2.X[0], d2.X[1], d2.Y[0], d2.Y[1]);
+//        console.log("A1");
+//        console.log(A1.X, A1.Y);
+//        console.log("B2");
+//        console.log(B2.X[0], B2.X[1], B2.Y[0], B2.Y[1]);
+//        console.log("a1");
+//        console.log(a1.X, a1.Y);
+//        console.log("b2");
+//        console.log(b2.X[0], b2.X[1], b2.Y[0], b2.Y[1]);
+//        console.log("X1");
+//        console.log(X1.X, X1.Y);
+//        console.log("c2");
+//        console.log(c2.X[0], c2.X[1], c2.Y[0], c2.Y[1]);
+//        console.log("C1");
+//        console.log(C1.X, C1.Y);
+//        console.log("d2");
+//        console.log(d2.X[0], d2.X[1], d2.Y[0], d2.Y[1]);
 
         verified = pairing(A1, B2, a1, b2, X1, c2, C1, d2);
         console.log(verified);
