@@ -50,6 +50,7 @@ describe("ZkDemo", function () {
       const { zkDemo } = await loadFixture(deployZkDemo);
 
       let A1 = await zkDemo.initG1(2);
+      A1 = await zkDemo.negate([A1[0], A1[1]]);
       let B2 = [
         [
           710971659950299075351025638299543031158944726718316196630017563250057256894n,

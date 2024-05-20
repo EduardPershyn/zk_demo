@@ -7,6 +7,8 @@ contract ZkDemo {
     // bn128
     uint256 constant Gx = 1;
     uint256 constant Gy = 2;
+    uint256 constant PRIME_Q =
+        21888242871839275222246405745257275088696311157297823662689037894645226208583;
     uint256 constant curve_order =
         21888242871839275222246405745257275088548364400416034343698204186575808495617;
 
@@ -117,6 +119,15 @@ contract ZkDemo {
         require(success, "pairing-opcode-failed");
 
         return out[0] != 0;
+    }
+
+    function negate(G1Point memory p) public pure returns (G1Point memory) {
+        // The prime q in the base field F_q for G1
+        if (p.X == 0 && p.Y == 0) {
+            return G1Point(0, 0);
+        } else {
+            return G1Point(p.X, PRIME_Q - (p.Y % PRIME_Q));
+        }
     }
 
     function rationalToECPoint(
